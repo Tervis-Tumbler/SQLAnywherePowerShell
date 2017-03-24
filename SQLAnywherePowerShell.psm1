@@ -25,5 +25,12 @@
         #$DBUnloadSQL[$StartOfSection..$EndOfSection] | measure
         $Sections[$Index] = $DBUnloadSQL[$StartOfSection..$EndOfSection]
     }
+}
 
+function Get-DatabaseNames {
+    param (
+        $ConnectionString
+    )
+    $Query = "select db_name( number ) from sa_db_list();"
+    Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -DatabaseEngineClassMapName SQLAnywhere -ConvertFromDataRow
 }

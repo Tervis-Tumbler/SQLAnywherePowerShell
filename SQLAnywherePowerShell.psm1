@@ -35,7 +35,7 @@ function Get-DatabaseNames {
     Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -DatabaseEngineClassMapName SQLAnywhere -ConvertFromDataRow
 }
 
-function Get-SQLAnywhereConnections {
+function Get-SQLAnywhereConnection {
     param (
         $ConnectionString
     )
@@ -44,6 +44,17 @@ SELECT *,
     DB_NAME( DBNumber ) as DBName, 
     CONNECTION_PROPERTY( 'LastStatement', Number ) as LastStatement
 FROM sa_conn_info( );
+"@
+    Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -DatabaseEngineClassMapName SQLAnywhere -ConvertFromDataRow
+}
+
+function Remove-SQLAnywhereConnection {
+    param (
+        [Parameter(Mandatory)]$ConnectionString,
+        [Parameter(Mandatory)]$ID
+    )
+    $Query = @"
+    DROP CONNECTION $ID;
 "@
     Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -DatabaseEngineClassMapName SQLAnywhere -ConvertFromDataRow
 }

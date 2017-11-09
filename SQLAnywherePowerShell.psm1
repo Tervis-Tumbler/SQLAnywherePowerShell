@@ -58,3 +58,11 @@ function Remove-SQLAnywhereConnection {
 "@
     Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -DatabaseEngineClassMapName SQLAnywhere -ConvertFromDataRow
 }
+
+function Get-SQLAnywhereConnectionUniqueIPs {
+    param (
+        $ConnectionString
+    )
+    Get-SQLAnywhereConnection -ConnectionString $ConnectionString |
+    Sort-Object -Unique
+}

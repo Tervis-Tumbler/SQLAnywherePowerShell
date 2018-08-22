@@ -32,7 +32,7 @@ function Get-DatabaseNames {
         $ConnectionString
     )
     $Query = "select db_name( number ) from sa_db_list();"
-    Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -DatabaseEngineClassMapName SQLAnywhere -ConvertFromDataRow
+    Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -ConvertFromDataRow
 }
 
 function Get-SQLAnywhereConnection {
@@ -45,7 +45,7 @@ SELECT *,
     CONNECTION_PROPERTY( 'LastStatement', Number ) as LastStatement
 FROM sa_conn_info( );
 "@
-    Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -DatabaseEngineClassMapName SQLAnywhere -ConvertFromDataRow
+    Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -ConvertFromDataRow
 }
 
 function Remove-SQLAnywhereConnection {
@@ -56,7 +56,7 @@ function Remove-SQLAnywhereConnection {
     $Query = @"
     DROP CONNECTION $ID;
 "@
-    Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -DatabaseEngineClassMapName SQLAnywhere -ConvertFromDataRow
+    Invoke-SQLAnywhereSQL -ConnectionString $ConnectionString -SQLCommand $Query -ConvertFromDataRow
 }
 
 function Get-SQLAnywhereConnectionUniqueIPs {
